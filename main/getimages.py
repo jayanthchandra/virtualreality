@@ -86,6 +86,7 @@ while firstattempt < 3:
           print '******************* PAGE:' + str(z) + 'FAILED TO LOAD'
           pageattempts+=1
     fl.close()
+    f2.close()
     fail.close()
     firstattempt = 4
   except KeyboardInterrupt:
