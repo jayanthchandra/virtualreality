@@ -1,18 +1,3 @@
-"""
-
-getimages.py
-
-  By: Anna Fatsevych
-  Date: May 19, 2015
-
-  Program to download images using flickr API (flickr.py) for Python
-  Uses date and license parameters at the command line
-  First argument is license(s): could be a list of multiples: 1,2,3
-  Second arg is the date in "YYYY-MM-DD" format
-
-"""
-
-
 import flickr
 import urllib, urlparse
 import os
@@ -45,6 +30,7 @@ while firstattempt < 3:
           #print 'license:', lic
           urllist = [] #store a list of what was downloaded
           fl = open('urllist.txt', 'w')
+          imageurl=open('imagelist.txt','w')
           fail = open('failed.txt', 'w')
           counter = 0
           attempts = 0
@@ -63,10 +49,14 @@ while firstattempt < 3:
                 urlcredit=('https://www.flickr.com/photos/' + str(k.owner.id) + '/'+k.id + 'Owner Real Name: ' + str(k.owner.realname)+'License: ' + str(k.license))
                 #counter=counter+1
                 image = urllib.URLopener()
+
                 attempts = 0
                 while attempts < 3:
                   try:
                     image.retrieve(url, os.path.basename(urlparse.urlparse(url).path))
+                    imagelist.write(os.path.basename(urlparse.urlparse(url).path)+'\n')
+                    print os.path.basename(urlparse.urlparse(url).path)
+                    print urlparse(url).path
                     fl.write(urlcredit+'\n')
                     print 'downloading: ' + str(url) + 'Page: ' + str(z+1) + 'File:' + str(counter)
                     print 'writing to DOWNLOAD file:' , urlcredit
