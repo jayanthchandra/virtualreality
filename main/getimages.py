@@ -30,7 +30,7 @@ while firstattempt < 3:
           #print 'license:', lic
           urllist = [] #store a list of what was downloaded
           fl = open('urllist.txt', 'w')
-          imageurl=open('imagelist.txt','w')
+          f2=open('imagelist.txt','w')
           fail = open('failed.txt', 'w')
           counter = 0
           attempts = 0
@@ -54,7 +54,8 @@ while firstattempt < 3:
                 while attempts < 3:
                   try:
                     image.retrieve(url, os.path.basename(urlparse.urlparse(url).path))
-                    imagelist.write(os.path.basename(urlparse.urlparse(url).path)+'\n')
+                    if attempts == 1 :
+                        f2.write(os.path.basename(urlparse.urlparse(url).path)+'\n')
                     print os.path.basename(urlparse.urlparse(url).path)
                     print urlparse(url).path
                     fl.write(urlcredit+'\n')
